@@ -12,19 +12,19 @@
     (item (:name it)
        (dec (:sellin it))
         (if (= "Aged Brie")
-              (inc (inc (:quality it)))
+              (min (inc (inc (:quality it))) 50)
               (max (dec (dec (:quality it))) 0)))
     (item (:name it)
          (dec (:sellin it))
           (if (= "Aged Brie")
-            (inc (:quality it))
+            (min (inc (:quality it)) 50)
             (max (dec (:quality it)) 0)))))
 
 (age-one-day (age-one-day (item "a" 1 2)))
 (age-one-day (item "a" 1 2))
 (age-one-day (item "a" 1 0))
 (age-one-day (age-one-day (age-one-day (item "Aged Brie" 1 0))))
-
+(age-one-day (item "Aged Brie" 10 50))
 
 (:sellin non-expired-item)
 (:quality non-expired-item)
