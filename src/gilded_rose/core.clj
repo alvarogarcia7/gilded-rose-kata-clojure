@@ -5,3 +5,6 @@
    :quality quality})
 
 (item 1 2)
+
+(defn age-one-day [item]
+  item)
