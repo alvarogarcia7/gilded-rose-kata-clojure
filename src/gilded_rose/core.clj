@@ -1,21 +1,29 @@
 (ns gilded-rose.core)
 
-(defn item [sellin quality]
+(defn item [name sellin quality]
   {:sellin sellin
-   :quality quality})
+   :quality quality
+   :name name})
 
-(def non-expired-item (item 1 2))
+(def non-expired-item (item "normal" 1 2))
 
 (defn age-one-day [it]
   (if (< (:sellin it) 0)
-    (item (dec (:sellin it))
-        (max (dec (dec (:quality it))) 0))
-    (item (dec (:sellin it))
-          (max (dec (:quality it)) 0))))
+    (item (:name it)
+       (dec (:sellin it))
+        (if (= "Aged Brie")
+              (inc (inc (:quality it)))
+              (max (dec (dec (:quality it))) 0)))
+    (item (:name it)
+         (dec (:sellin it))
+          (if (= "Aged Brie")
+            (inc (:quality it))
+            (max (dec (:quality it)) 0)))))
 
-(age-one-day (age-one-day (item 1 2)))
-(age-one-day (item 1 2))
-(age-one-day (item 1 0))
+(age-one-day (age-one-day (item "a" 1 2)))
+(age-one-day (item "a" 1 2))
+(age-one-day (item "a" 1 0))
+(age-one-day (age-one-day (age-one-day (item "Aged Brie" 1 0))))
 
 
 (:sellin non-expired-item)
