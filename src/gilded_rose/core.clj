@@ -9,12 +9,13 @@
 (defn age-one-day [it]
   (if (< (:sellin it) 0)
     (item (dec (:sellin it))
-        (dec (dec (:quality it))))
+        (max (dec (dec (:quality it))) 0))
     (item (dec (:sellin it))
-          (dec (:quality it)))))
+          (max (dec (:quality it)) 0))))
 
 (age-one-day (age-one-day (item 1 2)))
 (age-one-day (item 1 2))
+(age-one-day (item 1 0))
 
 
 (:sellin non-expired-item)
